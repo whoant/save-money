@@ -16,15 +16,15 @@ class AuthMiddleware{
             if (!decodeToken) return next(throwError);
             // console.log(decodeToken);
 
-            const infoUser = await UserModel.findById(decodeToken.id).lean();
-            res.locals.infoUser = infoUser;
+            res.locals.infoUser = await UserModel.findById(decodeToken.id).lean();
             next();
         }catch (e) {
             next(throwError);
         }
-
     }
 
+
 }
+
 
 module.exports = new AuthMiddleware();

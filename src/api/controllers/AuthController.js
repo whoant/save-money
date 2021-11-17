@@ -30,8 +30,11 @@ class AuthController{
 
     async postLogin(req, res, next){
         const {user,pass} = req.body;
+
+        if (!user || !pass) return next(new appError('Vui lòng nhập thông tin đăng nhập !', 500));
+
         try {
-            if (!user || !pass) return next(new appError('Vui lòng nhập thông tin đăng nhập !', 500));
+
             const infoUser = await  UserModel.findOne({user, pass});
             if (!infoUser) return next(new appError("Tài khoản hoặc mật khẩu không chính xác !", 500));
 

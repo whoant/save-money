@@ -7,7 +7,9 @@ const router = Router();
 
 router.all('/*', AuthMiddleware.checkAuth);
 
-// router.post('/activity', ActivityController);
+
+
+router.post('/activity', ActivityController.getMyActivity);
 
 // router.post('/login', ActivityController.postLogin);
 
