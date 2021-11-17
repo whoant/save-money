@@ -17,19 +17,20 @@ const User = mongoose.Schema({
     time: {
         type: Date
     },
-    activity: {
-        type: Array
+    activities: {
+        type: Array,
+        default: []
     }
 }, {
     timestamp: true
 });
 
-User.pre('save', function (next){
+User.pre('save', function (next) {
     this.pass = hash256(this.pass);
     next();
 });
 
-User.pre('findOne', function (next){
+User.pre('findOne', function (next) {
     if (this._conditions.pass) this._conditions.pass = hash256(this._conditions.pass);
     next();
 });
