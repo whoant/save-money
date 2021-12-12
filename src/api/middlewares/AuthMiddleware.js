@@ -3,8 +3,8 @@ const jsonwebtoken = require('jsonwebtoken');
 const appError = require('../../utils/appError');
 const {JWT} = require('../../config');
 
-class AuthMiddleware{
-    async checkAuth(req, res, next){
+class AuthMiddleware {
+    async checkAuth(req, res, next) {
         const authorization = req.get('authorization');
         const throwError = new appError('Vui lòng đăng nhập !', 401);
 
@@ -14,11 +14,12 @@ class AuthMiddleware{
 
             const decodeToken = jsonwebtoken.decode(token, JWT.token);
             if (!decodeToken) return next(throwError);
-            // console.log(decodeToken);
 
-            res.locals.infoUser = await UserModel.findById(decodeToken.id).lean();
+            const infoUser = await UserModel.findById(decodeToken.id).lean();
+            if (!infoUser) return next(throwError);
+            res.locals.infoUser = infoUser;
             next();
-        }catch (e) {
+        } catch (e) {
             next(throwError);
         }
     }

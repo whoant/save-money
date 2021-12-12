@@ -15,7 +15,7 @@ const User = mongoose.Schema({
         required: true
     },
     time: {
-        type: Date
+        type: String
     },
     activities: {
         type: Array,
