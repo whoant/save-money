@@ -1,7 +1,7 @@
 const {Router} = require('express');
 
-const ActivityController = require('../controllers/ActivityController');
-const AuthMiddleware = require('../middlewares/AuthMiddleware');
+const ActivityController = require('../controllers/activity.controller');
+const AuthMiddleware = require('../middlewares/auth.middleware');
 
 const router = Router();
 

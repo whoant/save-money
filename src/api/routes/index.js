@@ -1,5 +1,5 @@
-const ActivityRoute = require('./ActivityRoute');
-const AuthRoute = require('./AuthRoute');
+const ActivityRoute = require('./activity.route');
+const AuthRoute = require('./auth.route');
 
 module.exports = app => {
     app.use('/auth', AuthRoute);
