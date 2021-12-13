@@ -34,5 +34,5 @@ jobs:
         echo JWT_TOKEN=${{secrets.JWT_TOKEN}}>> .env
         echo JWT_EXPIRES=${{secrets.JWT_EXPIRES}}>> .env
         echo SENTRY_URL=${{secrets.SENTRY_URL}}>> .env
-    - name: Run server
-      run: pm2 restart save-money  
+    - name: Deploy
+      run: pm2 delete save-money && pm2 start src/app.js --name=save-money
