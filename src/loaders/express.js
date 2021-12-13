@@ -2,8 +2,6 @@ const express = require('express');
 const morganBody = require('morgan-body');
 const routes = require('../api/routes');
 
-const morgan = require('morgan');
-
 module.exports = (app) => {
     app.use(express.json());
     morganBody(app);
