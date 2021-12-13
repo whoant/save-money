@@ -13,7 +13,7 @@ class ActivityController {
                 time: infoUser.time,
             });
         } catch (e) {
-            next(new appError('Có lỗi trong quá trình đồng bộ !', 500));
+            next(new appError(e, 'Có lỗi trong quá trình đồng bộ !', 500));
         }
     }
 
@@ -31,7 +31,7 @@ class ActivityController {
                 message: 'Đồng bộ dữ liệu thành công !',
             });
         } catch (e) {
-            next(new appError('Có lỗi trong quá trình cập nhập !', 500));
+            next(new appError(e, 'Có lỗi trong quá trình cập nhập !', 500));
         }
     }
 }
