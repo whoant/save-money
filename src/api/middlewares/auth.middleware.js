@@ -10,6 +10,7 @@ class AuthMiddleware {
 
         if (!authorization || !authorization.startsWith('Bearer')) return next(throwError);
         const token = authorization.split(' ')[1];
+
         try {
             const decodeToken = jsonwebtoken.decode(token, JWT.token);
             if (!decodeToken) return next(throwError);

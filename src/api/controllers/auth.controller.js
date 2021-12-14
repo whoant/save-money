@@ -9,7 +9,7 @@ class AuthController {
         const { user, pass, fullName } = req.body;
         try {
             if (!user || !pass || !fullName) {
-                return next(new appError({}, 'Vui lòng nhập thông tin của bạn !', 500));
+                return next(new appError({}, 'Vui lòng nhập đầy đủ thông tin !', 500));
             }
 
             const check = await UserModel.findOne({ user });
