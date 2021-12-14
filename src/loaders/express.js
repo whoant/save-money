@@ -24,6 +24,13 @@ module.exports = (app) => {
     morganBody(app);
 
     routes(app);
+    app.get('/health', (req, res, next) => {
+        res.json({
+            status: 'success',
+            message: 'Health',
+        });
+        next();
+    });
 
     app.use(Sentry.Handlers.errorHandler());
     app.use((error, req, res, next) => {
