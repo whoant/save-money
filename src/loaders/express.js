@@ -29,6 +29,7 @@ module.exports = (app) => {
             status: 'success',
             message: 'Health',
         });
+        console.log('Health');
         next();
     });
 
