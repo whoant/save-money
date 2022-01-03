@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  save-money:
+    container_name: save-money-new
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: production.env
+    ports:
+      - ${PORT}:${PORT}
+    stdin_open: true
+    tty: true
+    depends_on:
+      - mongodb
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  mongodb:
+    container_name: mongodb-save-money-new
+    image: mongo
+    restart: unless-stopped
+    env_file: production.env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongodb
+      MONGO_INITDB_ROOT_PASSWORD: Vovanhoangtuan
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodata:/data/db
+
+volumes:
+  mongodata:
