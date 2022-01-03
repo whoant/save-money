@@ -1,4 +1,4 @@
-require('dotenv').config({path: './production.env'});
+require('dotenv').config();
 
 module.exports = {
     PORT: process.env.PORT,

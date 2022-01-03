@@ -1,4 +1,3 @@
 node_modules
 .idea
-development.env
-production.env
+.env

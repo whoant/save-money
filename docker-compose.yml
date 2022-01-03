@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    env_file: production.env
+    env_file: .env
     ports:
       - ${PORT}:${PORT}
     stdin_open: true
@@ -21,7 +21,7 @@ services:
     container_name: mongodb-save-money-new
     image: mongo
     restart: unless-stopped
-    env_file: production.env
+    env_file: .env
     environment:
       MONGO_INITDB_ROOT_USERNAME: mongodb
       MONGO_INITDB_ROOT_PASSWORD: Vovanhoangtuan
