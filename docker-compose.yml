@@ -25,8 +25,6 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: mongodb
       MONGO_INITDB_ROOT_PASSWORD: Vovanhoangtuan
-    ports:
-      - ":27017"
     volumes:
       - mongodata:/data/db
 
