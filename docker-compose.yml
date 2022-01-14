@@ -22,8 +22,6 @@ services:
     image: mongo
     restart: unless-stopped
     env_file: .env
-    ports:
-      - "27018:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: mongodb
       MONGO_INITDB_ROOT_PASSWORD: Vovanhoangtuan
