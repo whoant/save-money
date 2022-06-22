@@ -23,6 +23,10 @@ const User = mongoose.Schema(
             type: Array,
             default: [],
         },
+        isUpdate: {
+            type: Boolean,
+            default: false
+        }
     },
     {
         timestamp: true,
@@ -30,7 +34,6 @@ const User = mongoose.Schema(
 );
 
 User.pre('save', function (next) {
-    this.pass = hash256(this.pass);
     next();
 });
 

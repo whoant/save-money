@@ -15,7 +15,7 @@ class AuthMiddleware {
             const decodeToken = jsonwebtoken.decode(token, JWT.token);
             if (!decodeToken) return next(throwError);
 
-            const infoUser = await UserModel.findById(decodeToken.id).lean();
+            const infoUser = await UserModel.findById(decodeToken.id);
             if (!infoUser) return next(throwError);
             res.locals.infoUser = infoUser;
             next();

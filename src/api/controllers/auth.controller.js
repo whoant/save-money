@@ -3,6 +3,7 @@ const jsonwebtoken = require('jsonwebtoken');
 const { JWT } = require('../../config');
 
 const appError = require('../../utils/appError');
+const hash256 = require("../../utils/sha256");
 
 class AuthController {
     async postRegister(req, res, next) {
@@ -15,8 +16,8 @@ class AuthController {
             const check = await UserModel.findOne({ user });
 
             if (check) return next(new appError({}, 'Tài khoản của bạn đã tồn tại !', 500));
-
-            const newDoc = new UserModel({ user, pass, fullName });
+            const encryptPassword = hash256(pass);
+            const newDoc = new UserModel({ user, pass: encryptPassword, fullName });
             await newDoc.save();
 
             res.json({
@@ -37,8 +38,9 @@ class AuthController {
 
         try {
             const infoUser = await UserModel.findOne({ user, pass });
-            if (!infoUser)
-                return next(new appError({}, 'Tài khoản hoặc mật khẩu không chính xác !', 500));
+            if (!infoUser) {
+                throw new appError({}, 'Tài khoản hoặc mật khẩu không chính xác !', 500)
+            }
 
             const token = await jsonwebtoken.sign({ id: infoUser._id }, JWT.token, {
                 expiresIn: JWT.expires,
@@ -53,7 +55,7 @@ class AuthController {
                 activities: infoUser.activities,
             });
         } catch (e) {
-            next(new appError(e, 'Có lỗi trong quá trình đăng nhập !', 500));
+            next(e);
         }
     }
 }
